@@ -8,8 +8,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0d0d0d">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230d0d0d'/%3E%3Cg stroke='%231D9E75' stroke-width='7' stroke-linecap='round'%3E%3Cline x1='20' y1='50' x2='80' y2='50'/%3E%3Cline x1='30' y1='36' x2='30' y2='64'/%3E%3Cline x1='70' y1='36' x2='70' y2='64'/%3E%3Cline x1='16' y1='40' x2='16' y2='60'/%3E%3Cline x1='84' y1='40' x2='84' y2='60'/%3E%3C/g%3E%3C/svg%3E">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230d0d0d'/%3E%3Cg stroke='%231D9E75' stroke-width='7' stroke-linecap='round'%3E%3Cline x1='20' y1='50' x2='80' y2='50'/%3E%3Cline x1='30' y1='36' x2='30' y2='64'/%3E%3Cline x1='70' y1='36' x2='70' y2='64'/%3E%3Cline x1='16' y1='40' x2='16' y2='60'/%3E%3Cline x1='84' y1='40' x2='84' y2='60'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
 <style>
 :root{
   --bg:#0d0d0d; --surface:#141414; --surface-2:#1a1a1a; --surface-3:#202020;
@@ -46,6 +46,7 @@ body{padding-bottom:env(safe-area-inset-bottom); padding-top:env(safe-area-inset
 .superset-group .ex-card:last-child{margin-bottom:0;}
 .ex-card{background:var(--surface-2); border-radius:12px; margin-bottom:8px; overflow:hidden; border:0.5px solid transparent;}
 .ex-card.expanded{border-color:var(--accent);}
+.ex-card.done{border-color:var(--accent); background:#132720;}
 .ex-head{display:flex; justify-content:space-between; align-items:center; padding:12px 14px; cursor:pointer;}
 .ex-name{font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px;}
 .ex-name .num{color:var(--text-mute); font-weight:400; margin-right:2px;}
@@ -406,7 +407,7 @@ async function reconcileMissed(){
 }
 
 /* ---------- state ---------- */
-let state = { viewDate: null, viewMode:"plan", menuOpen:false, expanded:null, altOpen:false, log:null, popupQueue:[], popup:null, noteEditor:null, sessionNoteOpen:false };
+let state = { viewDate: null, viewMode:"plan", menuOpen:false, expanded:null, altOpen:false, log:null, popupQueue:[], popup:null, noteEditor:null, sessionNoteOpen:false, exportOpen:false };
 
 function currentDay(){ return state.viewMode==="quick" ? QUICK : PLAN[dayIndexFor(state.viewDate)]; }
 
@@ -422,6 +423,12 @@ function incrementFor(ex){
   if(ex.equipment==="bodyweight") return {kind:"reps", amount:1};
   if(ex.equipment==="dumbbell" || ex.equipment==="kettlebell") return {kind:"kg", amount:2};
   return {kind:"kg", amount:2.5};
+}
+function allSetsChecked(ex, entry){
+  if(!entry || !entry.sets) return false;
+  if(entry.sets.length < ex.sets) return false;
+  for(let s=0;s<ex.sets;s++){ if(!entry.sets[s] || !entry.sets[s].checked) return false; }
+  return true;
 }
 function exerciseHit(ex, entry){
   if(!entry || !entry.sets) return false;
@@ -516,6 +523,9 @@ async function render(){
 
   if(isToday && isLastDayOfMonth(todayISO())){
     html += `<div class="reminder-banner">Last day of the month — ask Claude in chat for your 1-page monthly training report.</div>`;
+  }
+  if(isToday && day.id!==QUICK_ID && dayIndexFor(todayISO())===13){
+    html += `<div class="reminder-banner">Last day of this training cycle — export your data (menu → Export) and paste it to Claude for a progress report.</div>`;
   }
 
   let timeLabel = "";
@@ -617,6 +627,7 @@ async function render(){
   renderPopup();
   renderNoteEditor(day);
   renderSessionNotePopup();
+  renderExportPopup();
   attachHandlers(day);
 }
 
@@ -628,7 +639,7 @@ function dateLabel(dateStr){
 async function renderExercise(ex, i, dayId){
   const expanded = state.expanded === ex.id;
   const entry = state.log.exercises[ex.id] || {sets:[]};
-  const hit = exerciseHit(ex, entry);
+  const done = allSetsChecked(ex, entry);
   const note = await getNote(dayId, ex.id);
   let body = "";
 
@@ -675,13 +686,13 @@ async function renderExercise(ex, i, dayId){
   const metaLine = ex.unit==="load" ? `${ex.sets}×${ex.reps}${ex.load!==undefined && ex.equipment!=='bodyweight'?' @ '+ex.load+'kg':''}` : (ex.unit==="time" ? `Hold ${ex.timeTarget}s` : (ex.notes||""));
   const displayName = entry.swap ? `${ex.name} → ${entry.swap}` : ex.name;
 
-  return `<div class="ex-card ${expanded?'expanded':''}">
+  return `<div class="ex-card ${expanded?'expanded':''} ${done?'done':''}">
     <div class="ex-head" data-toggle="${ex.id}">
       <div>
         <div class="ex-name"><span class="num">${i+1}.</span>${displayName}<span class="info-dot ${note?'has-note':''}" data-noteicon="${ex.id}">i</span></div>
         <div class="ex-meta">${metaLine}</div>
       </div>
-      <div class="ex-status ${hit?'hit':''}">${hit? '&#10003;' : '&#8250;'}</div>
+      <div class="ex-status ${done?'hit':''}">${done? '&#10003;' : '&#8250;'}</div>
     </div>
     ${body}
   </div>`;
@@ -763,6 +774,7 @@ async function renderMenu(){
     ${cells}
     <p class="section-label" style="margin-top:14px;">PROGRESS</p>
     ${metrics}
+    <button class="btn secondary" id="exportBtn" style="margin-top:10px;">Export data to paste to Claude</button>
   </div>`;
 
   const existing = document.getElementById("menuOverlay");
@@ -773,7 +785,72 @@ async function renderMenu(){
     if(e.target.id === "menuOverlay" || e.target.id === "closeMenu"){ state.menuOpen=false; render(); }
     const jump = e.target.closest("[data-jump]");
     if(jump){ setView(jump.dataset.jump); }
+    if(e.target.id === "exportBtn"){ openExportPopup(); }
   });
+}
+
+async function generateExportText(){
+  const keys = (await slist("log:")).sort();
+  const lines = [`Training log export — generated ${todayISO()}`, ""];
+  for(const k of keys){
+    const l = await sget(k);
+    if(!l) continue;
+    const date = k.replace("log:","");
+    const day = PLAN.find(d=>d.id===l.dayId) || QUICK;
+    lines.push(`${date} — ${day.title} [${l.status}]`);
+    if(l.status==="alternate"){
+      lines.push(`  Alternate: ${l.altTag||""} ${l.altDuration?l.altDuration+'min':''} ${l.altNote||''}`);
+    }
+    if(l.exercises && day.main && Array.isArray(day.main)){
+      Object.keys(l.exercises).forEach(exId=>{
+        if(exId==="choice") return;
+        const ex = day.main.find(m=>m.id===exId);
+        const entry = l.exercises[exId];
+        if(!entry || !entry.sets) return;
+        const setsStr = entry.sets.map(s=>{
+          if(!s) return "-";
+          const w = (s.weight!==undefined && s.weight!=='') ? s.weight+"kg x" : "";
+          const r = s.reps!==undefined ? s.reps : "";
+          return `${s.checked?'✓':'-'} ${w}${r}`;
+        }).join(", ");
+        lines.push(`  ${ex?ex.name:exId}: ${setsStr}`);
+      });
+    }
+    if(l.sessionNote) lines.push(`  Notes: ${l.sessionNote}`);
+    lines.push("");
+  }
+  return lines.join("\n");
+}
+
+function openExportPopup(){
+  state.menuOpen = false;
+  state.exportOpen = true;
+  render();
+}
+
+async function renderExportPopup(){
+  const existing = document.getElementById("exportOverlay");
+  if(existing) existing.remove();
+  if(!state.exportOpen) return;
+  const text = await generateExportText();
+  const overlay = document.createElement("div");
+  overlay.className = "popup-overlay open";
+  overlay.id = "exportOverlay";
+  overlay.innerHTML = `<div class="popup" style="max-width:400px;">
+    <p class="ask">Copy this and paste it to Claude in chat</p>
+    <textarea id="exportText" rows="10" style="font-size:11px;">${text}</textarea>
+    <div class="bottom-bar" style="margin-top:10px;">
+      <button class="btn primary" id="exportCopyBtn">Copy</button>
+      <button class="btn secondary" id="exportCloseBtn">Close</button>
+    </div>
+  </div>`;
+  document.getElementById("app").appendChild(overlay);
+  document.getElementById("exportCopyBtn").onclick = ()=>{
+    const ta = document.getElementById("exportText");
+    ta.select();
+    try{ navigator.clipboard.writeText(ta.value); }catch(e){ try{ document.execCommand('copy'); }catch(e2){} }
+  };
+  document.getElementById("exportCloseBtn").onclick = ()=>{ state.exportOpen=false; render(); };
 }
 
 async function computeProgress(){
@@ -1050,6 +1127,7 @@ async function setView(dateStr){
   state.menuOpen = false;
   state.noteEditor = null;
   state.sessionNoteOpen = false;
+  state.exportOpen = false;
   state.log = await loadLogFor(dateStr);
   render();
 }
