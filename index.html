@@ -148,49 +148,46 @@ const QUICK = { id:"quick",
     {id:"q-superman", name:"Superman hold", sets:3, reps:1, equipment:"bodyweight", rest:20, notes:"Back — no bar needed", unit:"time", timeTarget:30},
     {id:"q-bikecrunch", name:"Bicycle crunch", sets:3, reps:20, equipment:"bodyweight", rest:20, notes:"", unit:"load", alternatives:["Reverse crunch","Flutter kick"]}
   ],
-  cooldown:["Standing quad stretch","Child's pose","Doorway chest stretch","Seated forward fold","Neck stretch, 4 directions"],
+  cooldown:["Standing quad stretch","Child's pose","Chest stretch (wall)","Seated forward fold","Neck stretch, 4 directions"],
   coach:"Move through all 9 exercises as one round with minimal rest between them, then rest 60s and repeat — 3 rounds total. No pull-ups here since a bar isn't guaranteed to be available; do them separately another time if you have access to one." };
 
-/* ---------- plan data: Cycle 1, light re-entry ---------- */
+/* ---------- plan data: repeating 14-day cycle, loads updated for Cycle 2 ---------- */
 const PLAN = [
-{ id:"strength-lower-a", title:"Lower body power + core", tag:"Strength", muscle:"Legs, posterior chain, core", kind:"training", sauna:true,
-  focus:"Posterior chain, explosive power, anti-rotation core",
-  warmup:["Jumping jack — 30 reps, moderate pace","Hip circle + leg swings — 10 each, front/lateral","Glute bridge march — 15 reps, slow tempo","Ankle mobility (wall) — 10 each side","Deep squat hold — 30s, open hips","Air squat — 10 reps, full depth","Single-leg balance — 30s each leg, eyes open"],
+{ id:"cond-fullbody", title:"Full-body conditioning", tag:"Conditioning", muscle:"Full body, legs, posterior chain", kind:"training", sauna:true,
+  focus:"Anaerobic threshold, work capacity — lighter circuit this cycle, not max-effort",
+  warmup:["Row erg — 3 min, easy, 500m target pace","Inchworm walk-out — 8 reps","Jumping jack — 30 reps","Hip flexor mobility — 10 each side"],
   main:[
-    {id:"back-squat", name:"Back squat", sets:4, reps:3, load:75, equipment:"barbell", rest:150, notes:"~60% of full-cycle target, controlled tempo", unit:"load"},
-    {id:"rdl", name:"Romanian deadlift", sets:3, reps:6, load:65, equipment:"barbell", rest:120, notes:"Slow eccentric, 4s lowering", unit:"load"},
-    {id:"bulgarian-split-squat", name:"Bulgarian split squat", sets:2, reps:8, load:12, equipment:"dumbbell", rest:90, notes:"2x12kg DB, knee tracks toe", unit:"load"},
-    {id:"cable-pull-through", name:"Cable pull-through", sets:2, reps:12, load:20, equipment:"cable", rest:75, notes:"Glutes/hamstrings, hip hinge — swap for hip thrust", unit:"load"},
-    {id:"calf-raise-standing-a", name:"Standing calf raise", sets:2, reps:20, equipment:"bodyweight", rest:45, notes:"Slow eccentric, full stretch at bottom, pause at top — blood flow and calf activation for running/walking", unit:"load", alternatives:["Seated calf raise (if machine available)","Single-leg calf raise"]},
-    {id:"plank-a", name:"Plank", sets:2, reps:1, equipment:"bodyweight", rest:30, notes:"Core, neutral spine", unit:"time", timeTarget:40, alternatives:["Dead bug","Side plank, each side"]},
-    {id:"farmer-carry", name:"Farmer carry", sets:2, reps:6, load:18, equipment:"dumbbell", rest:75, notes:"2x18kg, 40m per set", unit:"load"}
+    {id:"circuit-a", name:"Circuit block A — 8 min", sets:1, reps:1, unit:"note", rest:0, notes:"Odd min: 8 kettlebell swing @16kg. Even min: 5 step-up (bench, moderate height)"},
+    {id:"circuit-b", name:"Circuit block B — 2 rounds", sets:1, reps:1, unit:"note", rest:90, notes:"10 kettlebell swing @16kg, 10 push-up (knee variation OK), 10 goblet squat @16kg"},
+    {id:"circuit-c", name:"Circuit block C — 2 rounds", sets:1, reps:1, unit:"note", rest:60, notes:"8 burpees, 5 box jumps (sub-max, soft landing)"},
+    {id:"circuit-d-optional", name:"Optional: rowing / med ball intervals", sets:1, reps:1, unit:"note", rest:90, notes:"4x250m rowing erg, hard effort — or swap in medicine ball slams (10-15 reps) between rounds if you'd rather use those"},
+    {id:"carry-complex", name:"Carry complex x2", sets:1, reps:1, unit:"note", rest:90, notes:"20m farmer carry @2x18kg, 20m overhead carry (light)"}
   ],
-  cooldown:["Pigeon stretch, each side","Hamstring floor stretch, flat back","Hip flexor lunge stretch, posterior tilt","Calf stretch (wall), each side","Forearm stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Box breathing (4-4-4-4) — 3 min, parasympathetic activation","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Hip flexor lunge stretch, each side","Figure-4 glute stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"hyp-pushpull-core", title:"Hypertrophy — push/pull + core", tag:"Hypertrophy", muscle:"Chest, back, arms, core", kind:"training", sauna:false,
   focus:"Chest/back split work, arms, core volume",
   warmup:["Jumping jack — 30 reps","Band pull-apart — 15 reps","Shoulder CARs — 5 each","Thoracic opening (arm sweep) — 8 each side","Inverted row (barbell in a rack or sturdy edge) — 10 reps","Push-up — 10 reps, activation"],
   main:[
-    {id:"bench-press", name:"Bench press", sets:3, reps:10, load:45, equipment:"barbell", rest:90, notes:"", unit:"load", superset:"A"},
-    {id:"barbell-row", name:"Barbell row", sets:3, reps:10, load:40, equipment:"barbell", rest:90, notes:"Minimal rest between the pair", unit:"load", superset:"A"},
-    {id:"incline-db-press", name:"Incline dumbbell press", sets:3, reps:12, load:14, equipment:"dumbbell", rest:90, notes:"2x14kg — swapped in for incline fly", unit:"load", superset:"B"},
-    {id:"meadows-row", name:"Meadows row", sets:3, reps:12, load:10, equipment:"barbell", rest:90, notes:"Plate-loaded landmine row, each arm separately. Plates only, excludes bar/sleeve", unit:"load", superset:"B"},
-    {id:"cable-crossover", name:"Cable crossover", sets:3, reps:15, load:8, equipment:"cable", rest:45, notes:"8kg each side, squeeze at peak", unit:"load"},
-    {id:"ez-curl-a", name:"EZ bar curl", sets:3, reps:12, load:12.5, equipment:"barbell", rest:60, notes:"Plates only, excludes bar", unit:"load"},
-    {id:"db-skull-crusher", name:"Dumbbell skull crusher", sets:3, reps:12, load:10, equipment:"dumbbell", rest:60, notes:"2x10kg, elbows tucked", unit:"load"},
-    {id:"face-pull-a", name:"Face pull", sets:3, reps:15, load:10, equipment:"cable", rest:45, notes:"Mandatory shoulder health", unit:"load"},
+    {id:"bench-press", name:"Bench press", sets:3, reps:10, load:50, equipment:"barbell", rest:90, notes:"", unit:"load", superset:"A"},
+    {id:"barbell-row", name:"Barbell row", sets:3, reps:10, load:45, equipment:"barbell", rest:90, notes:"Minimal rest between the pair", unit:"load", superset:"A"},
+    {id:"incline-db-press", name:"Incline dumbbell press", sets:3, reps:12, load:16, equipment:"dumbbell", rest:90, notes:"2x14kg — swapped in for incline fly", unit:"load", superset:"B"},
+    {id:"meadows-row", name:"Meadows row", sets:3, reps:12, load:12.5, equipment:"barbell", rest:90, notes:"Plate-loaded landmine row, each arm separately. Plates only, excludes bar/sleeve", unit:"load", superset:"B"},
+    {id:"cable-crossover", name:"Cable crossover", sets:3, reps:15, load:10, equipment:"cable", rest:45, notes:"8kg each side, squeeze at peak", unit:"load"},
+    {id:"ez-curl-a", name:"EZ bar curl", sets:3, reps:12, load:15, equipment:"barbell", rest:60, notes:"Plates only, excludes bar", unit:"load"},
+    {id:"db-skull-crusher", name:"Dumbbell skull crusher", sets:3, reps:12, load:12, equipment:"dumbbell", rest:60, notes:"2x10kg, elbows tucked", unit:"load"},
+    {id:"face-pull-a", name:"Face pull", sets:3, reps:15, load:12.5, equipment:"cable", rest:45, notes:"Mandatory shoulder health", unit:"load"},
     {id:"ab-wheel", name:"Ab wheel rollout", sets:2, reps:10, equipment:"bodyweight", rest:45, notes:"Knees down, full extension if possible", unit:"load", alternatives:["Plank walkout","Hollow body hold (time-based)"]},
     {id:"pushup-elevated-a", name:"Push-up, feet elevated", sets:3, reps:15, equipment:"bodyweight", rest:45, notes:"Chest finisher, bodyweight", unit:"load", alternatives:["Standard push-up","Diamond push-up"]}
   ],
-  cooldown:["Pec stretch","Lat stretch, each side","Tricep overhead stretch, each side","Supine twist, each side","Foam roller — upper back","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Pec stretch","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Lat stretch, each side","Tricep overhead stretch, each side","Supine twist, each side","Foam roller — upper back","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"endurance-swim", title:"Aerobic base + swim", tag:"Endurance", muscle:"Full body, cardio", kind:"training", sauna:true,
   focus:"Zone 2 aerobic, swim technique, lung capacity",
   warmup:["Easy swim — 5 min, mixed strokes, gentle pace, in the water"],
   main:[
-    {id:"swim-main-continuous", name:"Continuous freestyle", sets:1, reps:1, unit:"note", rest:0, notes:"30 min, steady Zone 2 pace — this is the main set, just swim, don't overthink it. Time-based for now, distance focus comes later"},
-    {id:"swim-technique", name:"Technique drill", sets:1, reps:1, unit:"note", rest:0, notes:"5 min, catch-up drill or fingertip drag, easy effort — whichever feels natural"},
-    {id:"swim-cooldown", name:"Cool-down swim", sets:1, reps:1, unit:"note", rest:0, notes:"5 min, easy backstroke, in the water"}
+    {id:"swim-main-continuous", name:"Continuous freestyle", sets:1, reps:1, unit:"note", rest:0, notes:"30 min, steady Zone 2 pace — just swim, don't overthink it. Log total distance covered at the end of the set", logDistance:true},
+    {id:"swim-apnea", name:"Breathwork (apnea)", sets:1, reps:1, unit:"note", rest:0, notes:"5 min, controlled breath holds with easy rest between, in the water"}
   ],
   cooldown:["Pool edge hip flexor stretch, each side","Chest expansion (hands behind back)","Standing quad stretch, each side"] },
 
@@ -198,29 +195,29 @@ const PLAN = [
   focus:"Quad, glute, hamstring volume. Best-rested slot in the cycle for legs.",
   warmup:["Stationary bike — 3 min, easy","Leg swing (dynamic) — 10 each, front/lateral","Cossack squat — 8 each, full adductor stretch","Deep squat hold — 30s, open hips","Box jump (sub-max) — 5 reps, soft landing"],
   main:[
-    {id:"front-squat", name:"Front squat", sets:3, reps:8, load:45, equipment:"barbell", rest:90, notes:"Upright torso", unit:"load"},
-    {id:"leg-press", name:"Leg press", sets:3, reps:15, load:90, equipment:"machine", rest:75, notes:"High foot placement", unit:"load"},
+    {id:"front-squat", name:"Front squat", sets:3, reps:8, load:50, equipment:"barbell", rest:90, notes:"Upright torso", unit:"load"},
+    {id:"leg-press", name:"Leg press", sets:3, reps:15, load:100, equipment:"machine", rest:75, notes:"High foot placement", unit:"load"},
     {id:"nordic-curl", name:"Nordic hamstring curl", sets:2, reps:5, equipment:"bodyweight", rest:90, notes:"Eccentric-only is fine if full rep isn't available yet", unit:"load", alternatives:["Slider hamstring curl","Single-leg RDL, bodyweight only"]},
-    {id:"walking-lunge", name:"Walking lunge", sets:3, reps:12, load:12, equipment:"dumbbell", rest:60, notes:"2x12kg, 20m strip", unit:"load"},
-    {id:"single-leg-rdl", name:"Single-leg RDL", sets:3, reps:10, load:12, equipment:"dumbbell", rest:60, notes:"12kg DB, proprioception + posterior chain", unit:"load"},
+    {id:"walking-lunge", name:"Walking lunge", sets:3, reps:12, load:14, equipment:"dumbbell", rest:60, notes:"2x12kg, 20m strip", unit:"load"},
+    {id:"single-leg-rdl", name:"Single-leg RDL", sets:3, reps:10, load:14, equipment:"dumbbell", rest:60, notes:"12kg DB, proprioception + posterior chain", unit:"load"},
     {id:"calf-raise-standing-b", name:"Bodyweight calf raise", sets:3, reps:20, equipment:"bodyweight", rest:45, notes:"Standing, slow eccentric, full stretch and pause at top — blood flow and form for walking/running", unit:"load", alternatives:["Seated calf raise (if machine available)","Single-leg calf raise"]},
     {id:"dead-bug", name:"Dead bug", sets:2, reps:10, equipment:"bodyweight", rest:30, notes:"Core, controlled, opposite arm/leg", unit:"load", alternatives:["Plank","Bird dog"]}
   ],
-  cooldown:["Pigeon stretch, each side","Standing quad stretch, each side","Calf stretch (downward dog), each side","Lying hamstring strap stretch, each side","Hip flexor 90/90 stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Standing quad stretch, each side","Calf stretch (downward dog), each side","Lying hamstring strap stretch, each side","Hip flexor 90/90 stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"strength-upper-grip", title:"Upper body strength + grip", tag:"Strength", muscle:"Back, shoulders, grip", kind:"training", sauna:true,
   focus:"Pull-dominant, scapular health, grip, neck",
   warmup:["Band pull-apart — 15 reps, light band","Face pulls (cable) — 15 reps, external rotation","Arm circles + shoulder CARs — 10 each, full ROM","Cat-cow — 10 reps, thoracic focus","Dead hang — 30s, decompress spine"],
   main:[
     {id:"weighted-pullup", name:"Weighted pull-up", sets:4, reps:4, load:0, equipment:"bodyweight-weighted", rest:150, notes:"Bodyweight only this cycle — add belt weight once reps feel easy", unit:"load", alternatives:["Band-assisted pull-up","Negative pull-up (5s lowering)"]},
-    {id:"pendlay-row", name:"Pendlay row", sets:3, reps:6, load:45, equipment:"barbell", rest:90, notes:"Explosive pull", unit:"load"},
-    {id:"ohp", name:"Overhead press", sets:2, reps:6, load:30, equipment:"barbell", rest:90, notes:"Strict, technique focus over load", unit:"load"},
-    {id:"face-pull-b", name:"Face pull", sets:2, reps:15, load:10, equipment:"cable", rest:45, notes:"Rope attachment, shoulder health", unit:"load"},
+    {id:"pendlay-row", name:"Pendlay row", sets:3, reps:6, load:50, equipment:"barbell", rest:90, notes:"Explosive pull", unit:"load"},
+    {id:"ohp", name:"Overhead press", sets:2, reps:6, load:32.5, equipment:"barbell", rest:90, notes:"Strict, technique focus over load", unit:"load"},
+    {id:"face-pull-b", name:"Face pull", sets:2, reps:15, load:12.5, equipment:"cable", rest:45, notes:"Rope attachment, shoulder health", unit:"load"},
     {id:"fatgrip-hold", name:"Fat grip deadlift hold", sets:2, reps:1, load:45, equipment:"barbell", rest:45, notes:"Grip endurance", unit:"time", timeTarget:20},
     {id:"neck-isometric-a", name:"Neck isometric hold, 4-way", sets:2, reps:15, equipment:"bodyweight", rest:0, notes:"Manual resistance with your own hand — front, back, each side, no harness or plates", unit:"load"},
     {id:"hanging-knee-raise", name:"Hanging knee raise", sets:2, reps:12, equipment:"bodyweight", rest:30, notes:"Core, controlled, using the same bar as the pull-up", unit:"load", alternatives:["Lying leg raise","Knee-to-elbow crunch"]}
   ],
-  cooldown:["Doorway chest stretch, each angle","Lat stretch (overhead bar hang)","Cross-body shoulder stretch, each side","Wrist flexor/extensor stretch, each side","Neck stretch, 4 directions","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Chest stretch (wall), each angle","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Lat stretch (overhead bar hang)","Cross-body shoulder stretch, each side","Wrist flexor/extensor stretch, each side","Neck stretch, 4 directions","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"recovery-a", title:"Active recovery", tag:"Recovery", muscle:"Cardio, low intensity", kind:"choice", sauna:false,
   focus:"Blood flow, aerobic maintenance, mental reset — no sauna/plunge on weekends",
@@ -229,8 +226,8 @@ const PLAN = [
     {name:"Long, slow run", duration:"35-45 min", intensity:"HR < 130 bpm, conversational pace", notes:"Easier than full-cycle version — building an aerobic base"},
     {name:"Hike", duration:"45-60 min", intensity:"Bodyweight, flat-to-moderate terrain", notes:""}
   ]},
-  cooldown:["Foam roller — full body, quads/IT band/upper back","Standing hip flexor stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"],
-  coach:"No sauna or cold plunge on weekends. Nutrition focus day — hit protein targets." },
+  cooldown:["Pigeon stretch, each side","Standing hip flexor stretch, each side"],
+  coach:"No sauna or cold plunge on weekends. No foam roller — not always at the gym on weekends. Nutrition focus day — hit protein targets." },
 
 { id:"yoga-a", title:"Yoga & mobility", tag:"Mobility", muscle:"Full body, joint mobility", kind:"flow", sauna:false,
   focus:"Parasympathetic recovery, joint range of motion, breath work",
@@ -241,6 +238,7 @@ const PLAN = [
     {name:"Sun Salutation B", duration:"3 rounds", notes:"Adds Chair Pose and Warrior I into the sequence"},
     {name:"Warrior I → Warrior II → Reverse Warrior", duration:"3 each side", notes:"5 breaths per pose"},
     {name:"Lizard Lunge with spinal twist", duration:"2 each side", notes:"Back knee down variation, deep hip flexor"},
+    {name:"Pigeon Pose", duration:"2 each side", notes:""},
     {name:"Seated Forward Fold", duration:"~2 min", notes:"Hands to feet or shins"},
     {name:"Supine Spinal Twist", duration:"each side", notes:"Knees drop to opposite side"},
     {name:"Thread-the-Needle → Puppy Pose flow", duration:"~5 min", notes:"Thoracic rotation focus"},
@@ -254,63 +252,66 @@ const PLAN = [
   focus:"Power transfer, full-body coordination — technical lifts substituted for a safer re-entry",
   warmup:["Romanian deadlift (barbell) — 10 reps, activate posterior chain","Overhead squat (PVC/empty bar) — 10 reps, mobility check","Hip circle — 10 each","Jumping jack — 30 reps"],
   main:[
-    {id:"kb-swing", name:"Kettlebell swing", sets:4, reps:10, load:16, equipment:"kettlebell", rest:90, notes:"Substitute for power clean this cycle — hip-hinge power without the catch", unit:"load"},
-    {id:"db-push-press", name:"Dumbbell push press", sets:3, reps:6, load:14, equipment:"dumbbell", rest:90, notes:"2x14kg, substitute for barbell push press", unit:"load"},
-    {id:"trap-bar-dl", name:"Trap bar deadlift", sets:3, reps:5, load:75, equipment:"barbell", rest:150, notes:"Includes the trap bar itself (~25kg). ~60% target load, neutral spine, controlled", unit:"load"},
+    {id:"kb-swing", name:"Kettlebell swing", sets:4, reps:10, load:18, equipment:"kettlebell", rest:90, notes:"Substitute for power clean this cycle — hip-hinge power without the catch", unit:"load"},
+    {id:"db-push-press", name:"Dumbbell push press", sets:3, reps:6, load:16, equipment:"dumbbell", rest:90, notes:"2x14kg, substitute for barbell push press", unit:"load"},
+    {id:"trap-bar-dl", name:"Trap bar deadlift", sets:3, reps:5, load:85, equipment:"barbell", rest:150, notes:"Includes the trap bar itself (~25kg). Cycle 2 — stepped up from Cycle 1. Neutral spine, controlled", unit:"load"},
     {id:"dip-a", name:"Dip", sets:2, reps:8, equipment:"bodyweight", rest:75, notes:"Bodyweight this cycle — add load once easy", unit:"load", alternatives:["Bench dip (feet on floor)","Close-grip push-up"]},
     {id:"hollow-hold-a", name:"Hollow body hold", sets:2, reps:1, equipment:"bodyweight", rest:30, notes:"Core", unit:"time", timeTarget:25, alternatives:["Plank","Dead bug"]}
   ],
-  cooldown:["Hip flexor stretch, each side","Thoracic foam roller","Hamstring stretch (doorway), each side","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Hip flexor stretch, each side","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Thoracic foam roller","Hamstring stretch (wall), each side","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"hyp-upperpull", title:"Hypertrophy — upper pull", tag:"Hypertrophy", muscle:"Back, biceps, rear delt", kind:"training", sauna:false,
   focus:"Back thickness, rear delt, biceps, grip, neck",
   warmup:["Dead hang — 30s","Scapular pull-up — 10 reps","Band external rotation — 15 each","Thoracic rotation (seated) — 10 each"],
   main:[
     {id:"pullup-wide", name:"Pull-up, wide grip", sets:3, reps:5, equipment:"bodyweight", rest:90, notes:"Use a band or box assist if needed — leave 2 reps in tank", unit:"load", alternatives:["Band-assisted pull-up","Chin-up"]},
-    {id:"cable-row-wide", name:"Cable row, wide grip", sets:3, reps:10, load:35, equipment:"cable", rest:75, notes:"Chest to pad", unit:"load"},
-    {id:"single-arm-db-row", name:"Single-arm DB row", sets:3, reps:12, load:18, equipment:"dumbbell", rest:60, notes:"Full rotation", unit:"load"},
-    {id:"reardelt-fly", name:"Rear delt fly, pec deck reverse", sets:3, reps:15, load:10, equipment:"machine", rest:45, notes:"Slow", unit:"load"},
-    {id:"ez-curl-b", name:"EZ bar curl", sets:3, reps:10, load:12.5, equipment:"barbell", rest:45, notes:"Plates only, excludes bar. Supinated grip", unit:"load"},
+    {id:"cable-row-wide", name:"Cable row, wide grip", sets:3, reps:10, load:37.5, equipment:"cable", rest:75, notes:"Chest to pad", unit:"load"},
+    {id:"single-arm-db-row", name:"Single-arm DB row", sets:3, reps:12, load:20, equipment:"dumbbell", rest:60, notes:"Full rotation", unit:"load"},
+    {id:"reardelt-fly", name:"Rear delt fly, pec deck reverse", sets:3, reps:15, load:12.5, equipment:"machine", rest:45, notes:"Slow", unit:"load"},
+    {id:"ez-curl-b", name:"EZ bar curl", sets:3, reps:10, load:15, equipment:"barbell", rest:45, notes:"Plates only, excludes bar. Supinated grip", unit:"load"},
     {id:"neck-isometric-b", name:"Neck isometric hold, 4-way", sets:2, reps:15, equipment:"bodyweight", rest:0, notes:"Manual resistance with your own hand — front, back, each side, no harness or plates", unit:"load"},
     {id:"hanging-leg-raise", name:"Hanging leg raise", sets:2, reps:12, equipment:"bodyweight", rest:45, notes:"Core, controlled", unit:"load", alternatives:["Lying leg raise","Knee raise (bent knees)"]}
   ],
-  cooldown:["Lat hang stretch, each arm","Cross-body shoulder stretch, each side","Bicep wall stretch, each side","Neck lateral stretch, each side","Forearm stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Lat hang stretch, each arm","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Cross-body shoulder stretch, each side","Bicep wall stretch, each side","Neck lateral stretch, each side","Wall stretch (forearm), each side","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"cond-tempo", title:"Interval → tempo run", tag:"Conditioning", muscle:"Cardio, legs", kind:"training", sauna:true,
   focus:"Aerobic power, continuous effort — sprints swapped for tempo work this cycle",
   warmup:["Easy jog — 5 min, HR < 120","High knee + butt kick — 1 min each","A-skip / B-skip drill — 20m each","Dynamic leg swings — 10 each direction"],
   main:[
-    {id:"tempo-run", name:"Continuous tempo run", sets:1, reps:1, unit:"note", rest:0, notes:"20 min, Zone 2-3 effort, conversational-to-moderate"},
-    {id:"strides", name:"Controlled strides x4", sets:1, reps:1, unit:"note", rest:90, notes:"60m at ~70% effort — acceleration control, not max sprint"},
-    {id:"easy-jog", name:"Easy jog/walk", sets:1, reps:1, unit:"note", rest:0, notes:"5 min, bring heart rate down gradually"}
+    {id:"tempo-steady", name:"Steady effort", sets:1, reps:1, unit:"note", rest:0, notes:"10 min, easy-to-moderate, settle into a rhythm"},
+    {id:"tempo-surges", name:"Tempo surges — 4x3 min", sets:1, reps:1, unit:"note", rest:120, notes:"Moderately hard pace for 3 min, then 2 min easy jog recovery. Repeat 4 times"},
+    {id:"easy-jog", name:"Cool-down jog", sets:1, reps:1, unit:"note", rest:0, notes:"5 min, bring heart rate down gradually"}
   ],
-  cooldown:["Standing hip flexor stretch, each side","IT band stretch (wall), each side","Calf / Achilles stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Standing hip flexor stretch, each side","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","IT band stretch (wall), each side","Calf / Achilles stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"hyp-push", title:"Hypertrophy — push focus", tag:"Hypertrophy", muscle:"Chest, shoulders, triceps", kind:"training", sauna:false,
   focus:"Chest, shoulders, triceps, serratus, neck",
   warmup:["Bike erg — 3 min, easy, warm joints","Band pull-apart — 15 reps","Shoulder CARs — 5 each, slow controlled","Thoracic opening (arm sweep) — 8 each side","Pike push-up — 10 reps"],
   main:[
-    {id:"incline-bb-press", name:"Incline barbell press", sets:3, reps:8, load:45, equipment:"barbell", rest:75, notes:"3-1-1 tempo", unit:"load"},
-    {id:"flat-db-press", name:"Flat dumbbell press", sets:3, reps:10, load:20, equipment:"dumbbell", rest:75, notes:"2x20kg, full stretch at bottom", unit:"load"},
+    {id:"incline-bb-press", name:"Incline barbell press", sets:3, reps:8, load:50, equipment:"barbell", rest:75, notes:"3-1-1 tempo", unit:"load"},
+    {id:"flat-db-press", name:"Flat dumbbell press", sets:3, reps:10, load:22, equipment:"dumbbell", rest:75, notes:"2x20kg, full stretch at bottom", unit:"load"},
     {id:"pushup-elevated-b", name:"Push-up, feet elevated", sets:3, reps:15, equipment:"bodyweight", rest:45, notes:"Serratus + chest, bodyweight", unit:"load", alternatives:["Standard push-up","Wide-grip push-up"]},
-    {id:"lateral-raise", name:"Lateral raise", sets:3, reps:15, load:7, equipment:"dumbbell", rest:45, notes:"No shrugging", unit:"load"},
-    {id:"arnold-press", name:"Arnold press", sets:2, reps:10, load:14, equipment:"dumbbell", rest:75, notes:"2x14kg, full rotation", unit:"load"},
+    {id:"lateral-raise", name:"Lateral raise", sets:3, reps:15, load:8, equipment:"dumbbell", rest:45, notes:"No shrugging", unit:"load"},
+    {id:"arnold-press", name:"Arnold press", sets:2, reps:10, load:16, equipment:"dumbbell", rest:75, notes:"2x14kg, full rotation", unit:"load"},
     {id:"tricep-dip-bench", name:"Tricep dip (bench)", sets:3, reps:12, equipment:"bodyweight", rest:45, notes:"Feet extended for more load if easy", unit:"load", alternatives:["Diamond push-up","Close-grip push-up"]},
     {id:"neck-isometric-c", name:"Neck isometric hold, 4-way", sets:2, reps:15, equipment:"bodyweight", rest:0, notes:"Manual resistance with your own hand — front, back, each side, no harness or plates", unit:"load"},
     {id:"bicycle-crunch", name:"Bicycle crunch", sets:2, reps:20, equipment:"bodyweight", rest:30, notes:"Core", unit:"load", alternatives:["Reverse crunch","Flutter kick"]}
   ],
-  cooldown:["Doorway chest stretch, each angle","Overhead lat stretch, each side","Neck stretch, lateral + anterior","Lying pectoral stretch","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Chest stretch (wall), each angle","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Overhead lat stretch, each side","Neck stretch, lateral + anterior","Lying pectoral stretch","L-sit against wall — 2 min, decompress spine and open chest"] },
 
-{ id:"cond-fullbody", title:"Full-body conditioning", tag:"Conditioning", muscle:"Full body, legs, posterior chain", kind:"training", sauna:true,
-  focus:"Anaerobic threshold, work capacity — lighter circuit this cycle, not max-effort",
-  warmup:["Row erg — 3 min, easy, 500m target pace","Inchworm walk-out — 8 reps","Jumping jack — 30 reps","Hip flexor mobility — 10 each side"],
+{ id:"strength-lower-a", title:"Lower body power + core", tag:"Strength", muscle:"Legs, posterior chain, core", kind:"training", sauna:true,
+  focus:"Posterior chain, explosive power, anti-rotation core",
+  warmup:["Jumping jack — 30 reps, moderate pace","Hip circle + leg swings — 10 each, front/lateral","Glute bridge march — 15 reps, slow tempo","Ankle mobility (wall) — 10 each side","Deep squat hold — 30s, open hips","Air squat — 10 reps, full depth","Single-leg balance — 30s each leg, eyes open"],
   main:[
-    {id:"circuit-a", name:"Circuit block A — 8 min", sets:1, reps:1, unit:"note", rest:0, notes:"Odd min: 8 kettlebell swing @16kg. Even min: 5 step-up (bench, moderate height)"},
-    {id:"circuit-b", name:"Circuit block B — 2 rounds", sets:1, reps:1, unit:"note", rest:90, notes:"10 kettlebell swing @16kg, 10 push-up (knee variation OK), 10 goblet squat @16kg"},
-    {id:"circuit-c", name:"Circuit block C — 2 rounds", sets:1, reps:1, unit:"note", rest:60, notes:"8 burpees, 5 box jumps (sub-max, soft landing)"},
-    {id:"carry-complex", name:"Carry complex x2", sets:1, reps:1, unit:"note", rest:90, notes:"20m farmer carry @2x18kg, 20m overhead carry (light)"}
+    {id:"back-squat", name:"Back squat", sets:4, reps:3, load:85, equipment:"barbell", rest:150, notes:"Cycle 2 — stepped up from Cycle 1. Controlled tempo", unit:"load"},
+    {id:"rdl", name:"Romanian deadlift", sets:3, reps:6, load:72.5, equipment:"barbell", rest:120, notes:"Slow eccentric, 4s lowering", unit:"load"},
+    {id:"bulgarian-split-squat", name:"Bulgarian split squat", sets:2, reps:8, load:14, equipment:"dumbbell", rest:90, notes:"2x12kg DB, knee tracks toe", unit:"load"},
+    {id:"cable-pull-through", name:"Cable pull-through", sets:2, reps:12, load:22.5, equipment:"cable", rest:75, notes:"Glutes/hamstrings, hip hinge — swap for hip thrust", unit:"load"},
+    {id:"calf-raise-standing-a", name:"Standing calf raise", sets:2, reps:20, equipment:"bodyweight", rest:45, notes:"Slow eccentric, full stretch at bottom, pause at top — blood flow and calf activation for running/walking", unit:"load", alternatives:["Seated calf raise (if machine available)","Single-leg calf raise"]},
+    {id:"plank-a", name:"Plank", sets:2, reps:1, equipment:"bodyweight", rest:30, notes:"Core, neutral spine", unit:"time", timeTarget:40, alternatives:["Dead bug","Side plank, each side"]},
+    {id:"farmer-carry", name:"Farmer carry", sets:2, reps:6, load:20, equipment:"dumbbell", rest:75, notes:"2x18kg, 40m per set", unit:"load"}
   ],
-  cooldown:["Box breathing (4-4-4-4) — 3 min, parasympathetic activation","Hip flexor lunge stretch, each side","Figure-4 glute stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Hamstring floor stretch, flat back","Hip flexor lunge stretch, posterior tilt","Calf stretch (wall), each side","Wall stretch (forearm), each side","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"recovery-b", title:"Active recovery", tag:"Recovery", muscle:"Cardio, low intensity", kind:"choice", sauna:false,
   focus:"Blood flow, aerobic base, stress reset — no sauna/plunge on weekends",
@@ -319,16 +320,17 @@ const PLAN = [
     {name:"Long, slow run, varied route", duration:"40-50 min", intensity:"HR < 130 bpm", notes:""},
     {name:"Hike", duration:"50-70 min", intensity:"Bodyweight, no ruck load yet", notes:"Build base mileage before adding pack weight"}
   ]},
-  cooldown:["Foam roller — full body","Hip flexor stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"],
-  coach:"Nutrition priority: carb-refeed day. No sauna or cold plunge on weekends." },
+  cooldown:["Pigeon stretch, each side","Hip flexor stretch, each side"],
+  coach:"Nutrition priority: carb-refeed day. No sauna or cold plunge on weekends. No foam roller — not always at the gym on weekends." },
 
 { id:"yoga-extended", title:"Yoga & mobility (extended)", tag:"Mobility", muscle:"Full body, joint mobility", kind:"flow", sauna:false,
   focus:"Full-cycle reset, deep tissue mobility, meditation",
   warmup:[],
   main:[
-    {name:"Box breathing / Wim Hof-style breath", duration:"4 min", notes:"3 rounds of 30 breaths, followed by a breath hold"},
+    {name:"Box breathing", duration:"4 min", notes:"4-4-4-4 pattern, 3 rounds"},
     {name:"Full Sun Salutation flow", duration:"5 rounds", notes:"A + B sequence combined"},
     {name:"Yin Yoga — Dragon Pose", duration:"2 each side", notes:"Deep hip flexor"},
+    {name:"Pigeon Pose", duration:"2 each side", notes:""},
     {name:"Yin Yoga — Sleeping Swan", duration:"2 each side", notes:"External hip rotation"},
     {name:"Yin Yoga — Shoelace (Double Pigeon)", duration:"2 each side", notes:"Glute / IT band"},
     {name:"Spine flow", duration:"~4 min", notes:"Cat-Cow, Thread-the-Needle, Windshield Wiper"},
@@ -337,7 +339,7 @@ const PLAN = [
     {name:"Savasana + body scan", duration:"10 min", notes:"Full CNS reset"}
   ],
   cooldown:[],
-  coach:"End of Cycle 1. Review your progress tab before Cycle 2 steps the loads back up." }
+  coach:"End of this cycle. Review your progress tab — loads step up again heading into the next cycle." }
 ];
 
 /* ---------- storage helpers: probe once at startup for a working backend, then commit to it (avoids per-call timeout stacking that caused a long blank screen) ---------- */
@@ -521,9 +523,6 @@ async function render(){
     html += `<div class="preview-banner">Cycle 1 starts Aug 25, 2026 — previewing Day 1.</div>`;
   }
 
-  if(isToday && isLastDayOfMonth(todayISO())){
-    html += `<div class="reminder-banner">Last day of the month — ask Claude in chat for your 1-page monthly training report.</div>`;
-  }
   if(isToday && day.id!==QUICK_ID && dayIndexFor(todayISO())===13){
     html += `<div class="reminder-banner">Last day of this training cycle — export your data (menu → Export) and paste it to Claude for a progress report.</div>`;
   }
@@ -575,6 +574,12 @@ async function render(){
         <div class="ometa">${opt.duration} · ${opt.intensity}${opt.notes? " · "+opt.notes : ""}</div>
       </div>`;
     });
+    if(state.log.exercises.choice !== undefined){
+      html += `<div class="note-row" style="margin-top:10px;"><span style="font-size:12px; color:var(--text-dim);">Actual duration (min)</span>
+        <input type="text" inputmode="numeric" style="width:90px;" id="choiceDuration" value="${state.log.actualDuration||''}"/></div>
+      <div class="note-row" style="margin-top:6px;"><span style="font-size:12px; color:var(--text-dim);">Distance (km)</span>
+        <input type="text" inputmode="decimal" style="width:90px;" id="choiceDistance" value="${state.log.actualDistance||''}"/></div>`;
+    }
     html += `</div>`;
   } else if(day.kind === "flow"){
     html += `<div class="section"><p class="section-label">SESSION FLOW</p><ol class="plain-list">`;
@@ -679,6 +684,7 @@ async function renderExercise(ex, i, dayId){
       body += `<div class="ex-body">
         <div class="note-row"><span style="font-size:12px; color:var(--text-dim);">Done</span>
         <span class="setcheck ${entry.done?'on':''}" data-kind="notedone" data-ex="${ex.id}">${entry.done?'&#10003;':''}</span></div>
+        ${ex.logDistance ? `<div class="note-row"><span style="font-size:12px; color:var(--text-dim);">Distance (m)</span><input type="text" inputmode="numeric" style="width:90px;" data-kind="distance" data-ex="${ex.id}" value="${entry.distance!==undefined?entry.distance:''}" placeholder="e.g. 1000"/></div>` : ``}
         <p class="tiny-hint">${ex.notes||""}${ex.rest? ' · rest '+formatRest(ex.rest):''}</p></div>`;
     }
   }
@@ -801,20 +807,34 @@ async function generateExportText(){
     if(l.status==="alternate"){
       lines.push(`  Alternate: ${l.altTag||""} ${l.altDuration?l.altDuration+'min':''} ${l.altNote||''}`);
     }
+    if(day.kind==="choice" && l.exercises && l.exercises.choice!==undefined){
+      const opt = day.main.options[l.exercises.choice];
+      lines.push(`  Activity: ${opt?opt.name:''}${l.actualDuration?' — '+l.actualDuration+' min':''}${l.actualDistance?' — '+l.actualDistance+' km':''}`);
+    }
     if(l.exercises && day.main && Array.isArray(day.main)){
-      Object.keys(l.exercises).forEach(exId=>{
-        if(exId==="choice") return;
+      for(const exId of Object.keys(l.exercises)){
+        if(exId==="choice") continue;
         const ex = day.main.find(m=>m.id===exId);
         const entry = l.exercises[exId];
-        if(!entry || !entry.sets) return;
-        const setsStr = entry.sets.map(s=>{
-          if(!s) return "-";
-          const w = (s.weight!==undefined && s.weight!=='') ? s.weight+"kg x" : "";
-          const r = s.reps!==undefined ? s.reps : "";
-          return `${s.checked?'✓':'-'} ${w}${r}`;
-        }).join(", ");
-        lines.push(`  ${ex?ex.name:exId}: ${setsStr}`);
-      });
+        if(entry && entry.sets){
+          const setsStr = entry.sets.map(s=>{
+            if(!s) return "-";
+            const w = (s.weight!==undefined && s.weight!=='') ? s.weight+"kg x" : "";
+            const r = s.reps!==undefined ? s.reps : "";
+            return `${s.checked?'✓':'-'} ${w}${r}`;
+          }).join(", ");
+          lines.push(`  ${ex?ex.name:exId}: ${setsStr}`);
+        } else if(entry && (entry.done || entry.distance!==undefined)){
+          const parts = [];
+          if(entry.done) parts.push("done");
+          if(entry.distance) parts.push(`${entry.distance}m`);
+          lines.push(`  ${ex?ex.name:exId}: ${parts.join(", ")}`);
+        } else {
+          continue;
+        }
+        const exNote = await getNote(l.dayId, exId);
+        if(exNote && exNote.text) lines.push(`    Exercise note: ${exNote.text}`);
+      }
     }
     if(l.sessionNote) lines.push(`  Notes: ${l.sessionNote}`);
     lines.push("");
@@ -1077,6 +1097,15 @@ function attachHandlers(day){
     };
   });
 
+  document.querySelectorAll("input[data-kind='distance']").forEach(inp=>{
+    inp.addEventListener("change", async ()=>{
+      const exId = inp.dataset.ex;
+      if(!state.log.exercises[exId]) state.log.exercises[exId] = {};
+      state.log.exercises[exId].distance = inp.value;
+      await saveLog();
+    });
+  });
+
   document.querySelectorAll("[data-choice]").forEach(el=>{
     el.onclick = async ()=>{
       state.log.exercises.choice = Number(el.dataset.choice);
@@ -1084,6 +1113,11 @@ function attachHandlers(day){
       render();
     };
   });
+
+  const choiceDur = document.getElementById("choiceDuration");
+  if(choiceDur) choiceDur.addEventListener("change", async ()=>{ state.log.actualDuration = choiceDur.value; await saveLog(); });
+  const choiceDist = document.getElementById("choiceDistance");
+  if(choiceDist) choiceDist.addEventListener("change", async ()=>{ state.log.actualDistance = choiceDist.value; await saveLog(); });
 
   const logBtn = document.getElementById("logBtn");
   if(logBtn) logBtn.onclick = async ()=>{
