@@ -157,26 +157,26 @@ const PLAN = [
   focus:"Anaerobic threshold, work capacity — lighter circuit this cycle, not max-effort",
   warmup:["Chain mobility flow (ankles, hips, spine, shoulders) — 1 min","Jumping jack — 30 reps","Hip flexor mobility — 10 each side"],
   main:[
-    {id:"circuit-a", name:"Circuit block A — 8 min", sets:1, reps:1, unit:"note", rest:0, notes:"Odd min: 8 kettlebell swing @16kg. Even min: 5 step-up (bench, moderate height)"},
+    {id:"circuit-a", name:"Circuit block A — 5 rounds", sets:1, reps:1, unit:"note", rest:60, notes:"10 reps each: KB swing @20kg, goblet squat (KB) @20kg, push-up, around-the-world @10kg DB, DB sit-up @10kg"},
     {id:"circuit-b", name:"Circuit block B — 2 rounds", sets:1, reps:1, unit:"note", rest:90, notes:"10 kettlebell swing @16kg, 10 push-up (knee variation OK), 10 goblet squat @16kg"},
     {id:"circuit-c", name:"Circuit block C — 2 rounds", sets:1, reps:1, unit:"note", rest:60, notes:"8 burpees, 5 box jumps (sub-max, soft landing)"},
     {id:"circuit-d-optional", name:"Optional: rowing / med ball intervals", sets:1, reps:1, unit:"note", rest:90, notes:"4x250m rowing erg, hard effort — or swap in medicine ball slams (10-15 reps) between rounds if you'd rather use those"},
     {id:"carry-complex", name:"Carry complex x2", sets:1, reps:1, unit:"note", rest:90, notes:"20m farmer carry @2x18kg, 20m overhead carry (light)"}
   ],
-  cooldown:["Box breathing (4-4-4-4) — 3 min, parasympathetic activation","Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Hip flexor lunge stretch, each side","Figure-4 glute stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
+  cooldown:["Pigeon stretch, each side","Deep squat hold","Lying lateral opening stretch (open book), each side","Hip flexor lunge stretch, each side","Figure-4 glute stretch, each side","L-sit against wall — 2 min, decompress spine and open chest"] },
 
 { id:"hyp-pushpull-core", title:"Hypertrophy — push/pull + core", tag:"Hypertrophy", muscle:"Chest, back, arms, core", kind:"training", sauna:false,
   focus:"Chest/back split work, arms, core volume",
   warmup:["Chain mobility flow (ankles, hips, spine, shoulders) — 1 min","Jumping jack — 30 reps","Band pull-apart — 15 reps","Shoulder CARs — 5 each","Thoracic opening (arm sweep) — 8 each side","Inverted row (barbell in a rack or sturdy edge) — 10 reps","Push-up — 10 reps, activation"],
   main:[
-    {id:"bench-press", name:"Bench press", sets:3, reps:10, load:50, equipment:"barbell", rest:90, notes:"", unit:"load", superset:"A"},
-    {id:"barbell-row", name:"Barbell row", sets:3, reps:10, load:45, equipment:"barbell", rest:90, notes:"Minimal rest between the pair", unit:"load", superset:"A"},
+    {id:"bench-press", name:"Bench press", sets:3, reps:10, load:50, equipment:"barbell", rest:90, notes:"", unit:"load"},
+    {id:"barbell-row", name:"Barbell row", sets:3, reps:10, load:45, equipment:"barbell", rest:90, notes:"", unit:"load"},
     {id:"incline-db-press", name:"Incline dumbbell press", sets:3, reps:12, load:16, equipment:"dumbbell", rest:90, notes:"Swapped in for incline fly", unit:"load", superset:"B"},
     {id:"meadows-row", name:"Meadows row", sets:3, reps:12, load:12.5, equipment:"barbell", rest:90, notes:"Plate-loaded landmine row, each arm separately. Plates only, excludes bar/sleeve", unit:"load", superset:"B"},
     {id:"cable-crossover", name:"Cable crossover", sets:3, reps:15, load:10, equipment:"cable", rest:45, notes:"Each side, squeeze at peak", unit:"load"},
     {id:"ez-curl-a", name:"EZ bar curl", sets:3, reps:12, load:15, equipment:"barbell", rest:60, notes:"Plates only, excludes bar", unit:"load"},
-    {id:"db-skull-crusher", name:"Dumbbell skull crusher", sets:3, reps:12, load:20, equipment:"dumbbell", rest:60, notes:"Single DB, both hands, elbows tucked", unit:"load"},
-    {id:"face-pull-a", name:"Face pull", sets:3, reps:15, load:12.5, equipment:"cable", rest:45, notes:"Mandatory shoulder health", unit:"load"},
+    {id:"tricep-pushdown-a", name:"Tricep rope pushdown", sets:3, reps:12, load:20, equipment:"cable", rest:60, notes:"Replaced skull crusher after repeated upper back/neck strain", unit:"load"},
+    {id:"face-pull-a", name:"Face pull", sets:3, reps:15, load:12.5, equipment:"cable", rest:45, notes:"Mandatory shoulder health. Use a towel or light band if no cable available", unit:"load"},
     {id:"ab-wheel", name:"Ab wheel rollout", sets:2, reps:10, equipment:"bodyweight", rest:45, notes:"Knees down, full extension if possible", unit:"load", alternatives:["Plank walkout","Hollow body hold (time-based)"]},
     {id:"pushup-elevated-a", name:"Push-up, feet elevated", sets:3, reps:15, equipment:"bodyweight", rest:45, notes:"Chest finisher, bodyweight", unit:"load", alternatives:["Standard push-up","Diamond push-up"]}
   ],
@@ -199,7 +199,7 @@ const PLAN = [
     {id:"goblet-squat", name:"Goblet squat", sets:3, reps:15, load:24, equipment:"kettlebell", rest:75, notes:"Non-machine alternative to leg press", unit:"load"},
     {id:"nordic-curl", name:"Nordic hamstring curl", sets:2, reps:5, equipment:"bodyweight", rest:90, notes:"Eccentric-only", unit:"load", alternatives:["Slider hamstring curl","Single-leg RDL, bodyweight only"]},
     {id:"walking-lunge", name:"Walking lunge", sets:3, reps:12, load:14, equipment:"dumbbell", rest:60, notes:"20m strip, alternate forward and reverse", unit:"load"},
-    {id:"single-leg-rdl", name:"Single-leg RDL", sets:3, reps:10, load:14, equipment:"dumbbell", rest:60, notes:"Single DB, proprioception + posterior chain", unit:"load"},
+    {id:"single-leg-rdl", name:"Single-leg RDL", sets:3, reps:10, load:14, equipment:"dumbbell", rest:60, notes:"Single DB, keep hips square and spine neutral to protect the lower back", unit:"load"},
     {id:"calf-raise-standing-b", name:"Bodyweight calf raise", sets:3, reps:20, equipment:"bodyweight", rest:45, notes:"Standing, slow eccentric, full stretch and pause at top — blood flow and form for walking/running", unit:"load", alternatives:["Seated calf raise (if machine available)","Single-leg calf raise"]},
     {id:"crunch-a", name:"Crunch", sets:2, reps:15, equipment:"bodyweight", rest:30, notes:"Ab-focused, controlled", unit:"load"},
     {id:"hip-strength-a", name:"Clamshell / fire hydrant", sets:2, reps:12, equipment:"bodyweight", rest:30, notes:"Each side, each exercise. Hip strengthening", unit:"load"}
@@ -641,7 +641,7 @@ async function render(){
   app.innerHTML = html;
   renderMenu();
   renderPopup();
-  renderNoteEditor(day);
+  await renderNoteEditor(day);
   renderSessionNotePopup();
   renderExportPopup();
   attachHandlers(day);
@@ -978,19 +978,21 @@ function nextPopup(){
   render();
 }
 
-function renderNoteEditor(day){
+async function renderNoteEditor(day){
   const existing = document.getElementById("noteOverlay");
   if(existing) existing.remove();
   if(state.noteEditor===null) return;
   const exId = state.noteEditor;
   const label = state.noteEditorLabel || exId;
+  const prior = await getNote(day.id, exId);
+  const priorText = prior && prior.text ? prior.text : "";
   const overlay = document.createElement("div");
   overlay.className = "popup-overlay open";
   overlay.id = "noteOverlay";
   overlay.innerHTML = `<div class="popup">
     <p class="lead">Feedback on: ${label}</p>
     <p class="ask" style="font-size:13px; font-weight:500;">Tell me what to adjust for next time — too easy, hurts a joint, want a swap, etc.</p>
-    <textarea id="noteText" rows="3" placeholder="e.g. left shoulder feels off on this, prefer a neutral grip"></textarea>
+    <textarea id="noteText" rows="3" placeholder="e.g. left shoulder feels off on this, prefer a neutral grip">${priorText}</textarea>
     <div class="bottom-bar" style="margin-top:10px;">
       <button class="btn primary" id="noteSaveBtn">Save note</button>
       <button class="btn secondary" id="noteCancelBtn">Cancel</button>
