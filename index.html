@@ -813,6 +813,41 @@ async function renderMenu(){
   });
 }
 
+/* ---------- GitHub sync ---------- */
+const GH_REPO = "lucalevantini/operator-app";
+async function ghPut(path, text, token){
+  const url = "https://api.github.com/repos/"+GH_REPO+"/contents/"+path;
+  const hdr = {"Authorization":"Bearer "+token, "Accept":"application/vnd.github+json"};
+  let sha;
+  const g = await fetch(url, {headers:hdr});
+  if(g.ok){ sha = (await g.json()).sha; }
+  else if(g.status!==404){ throw new Error("GitHub "+g.status+(g.status===401?" (token invalid or expired)":"")); }
+  const body = {message:"Training export "+path, content:btoa(unescape(encodeURIComponent(text)))};
+  if(sha) body.sha = sha;
+  const r = await fetch(url, {method:"PUT", headers:hdr, body:JSON.stringify(body)});
+  if(!r.ok) throw new Error("GitHub "+r.status+(r.status===404?" (token cannot access repo)":""));
+}
+async function uploadExport(cycleNo){
+  const cfg = await sget("settings:gh");
+  if(!cfg || !cfg.token) throw new Error("No token saved");
+  const text = await generateExportText();
+  await ghPut("exports/cycle-"+cycleNo+".txt", text, cfg.token);
+  await ghPut("exports/latest.txt", text, cfg.token);
+  await sset("settings:gh", {...cfg, lastUploaded: cycleNo, lastAt: todayISO()});
+}
+async function autoUpload(){
+  try{
+    const cfg = await sget("settings:gh");
+    if(!cfg || !cfg.token) return;
+    const t = todayISO();
+    if(t < PROGRAM_START) return;
+    const cur = Math.floor(diffDays(CYCLE_START, t)/14);
+    const target = (dayIndexFor(t)===13) ? cur : cur-1;
+    if(target < 0 || cfg.lastUploaded === target+1) return;
+    await uploadExport(target+1);
+  }catch(e){ console.error("autoUpload", e); }
+}
+
 async function generateExportText(){
   const keys = (await slist("log:")).sort();
   const lines = [`Training log export — generated ${todayISO()}`, ""];
@@ -893,6 +928,13 @@ async function renderExportPopup(){
       <button class="btn primary" id="exportCopyBtn">Copy</button>
       <button class="btn secondary" id="exportCloseBtn">Close</button>
     </div>
+    <p class="section-label" style="margin-top:14px;">AUTO SYNC TO GITHUB</p>
+    <input id="ghToken" type="password" placeholder="GitHub token (paste once)" autocomplete="off" style="width:100%;box-sizing:border-box;padding:10px;border-radius:8px;border:0.5px solid var(--border);background:transparent;color:var(--text);font-size:12px;">
+    <div class="bottom-bar" style="margin-top:8px;">
+      <button class="btn secondary" id="ghSaveBtn">Save token</button>
+      <button class="btn secondary" id="ghTestBtn">Upload now</button>
+    </div>
+    <p id="ghStatus" style="font-size:11px;color:var(--text-dim);margin:8px 0 0;"></p>
   </div>`;
   document.getElementById("app").appendChild(overlay);
   document.getElementById("exportCopyBtn").onclick = ()=>{
@@ -901,6 +943,25 @@ async function renderExportPopup(){
     try{ navigator.clipboard.writeText(ta.value); }catch(e){ try{ document.execCommand('copy'); }catch(e2){} }
   };
   document.getElementById("exportCloseBtn").onclick = ()=>{ state.exportOpen=false; render(); };
+  const st = document.getElementById("ghStatus");
+  const cfg0 = await sget("settings:gh");
+  if(cfg0 && cfg0.token) st.textContent = "Token saved" + (cfg0.lastAt ? ". Last upload " + cfg0.lastAt + " (cycle " + cfg0.lastUploaded + ")." : ".");
+  document.getElementById("ghSaveBtn").onclick = async ()=>{
+    const v = document.getElementById("ghToken").value.trim();
+    if(!v){ st.textContent = "Paste a token first."; return; }
+    const c = (await sget("settings:gh")) || {};
+    await sset("settings:gh", {...c, token:v});
+    document.getElementById("ghToken").value = "";
+    st.textContent = "Token saved on this phone.";
+  };
+  document.getElementById("ghTestBtn").onclick = async ()=>{
+    st.textContent = "Uploading...";
+    try{
+      const cur = Math.floor(diffDays(CYCLE_START, todayISO())/14) + 1;
+      await uploadExport(cur);
+      st.textContent = "Uploaded to GitHub.";
+    }catch(e){ st.textContent = "Failed: " + e.message; }
+  };
 }
 
 async function computeProgress(){
@@ -1208,6 +1269,7 @@ window.addEventListener('error', function(e){
     await reconcileMissed();
     const start = (todayISO() < PROGRAM_START) ? PROGRAM_START : todayISO();
     await setView(start);
+    autoUpload();
   }catch(e){
     const app = document.getElementById('app');
     if(app) app.innerHTML = '<div style="padding:24px;color:#E24B4A;font-size:13px;">Something went wrong: ' + (e && e.message ? e.message : e) + '</div>';
