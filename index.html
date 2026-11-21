@@ -838,14 +838,26 @@ async function uploadExport(cycleNo){
 async function autoUpload(){
   try{
     const cfg = await sget("settings:gh");
-    if(!cfg || !cfg.token) return;
+    if(!cfg || !cfg.token){ askToken(); return; }
     const t = todayISO();
-    if(t < PROGRAM_START) return;
-    const cur = Math.floor(diffDays(CYCLE_START, t)/14);
-    const target = (dayIndexFor(t)===13) ? cur : cur-1;
-    if(target < 0 || cfg.lastUploaded === target+1) return;
-    await uploadExport(target+1);
+    if(t < PROGRAM_START || cfg.lastAt === t) return;
+    await uploadExport(Math.floor(diffDays(CYCLE_START, t)/14)+1);
   }catch(e){ console.error("autoUpload", e); }
+}
+function askToken(){
+  if(document.getElementById("tokenOverlay")) return;
+  const o = document.createElement("div");
+  o.className = "popup-overlay open"; o.id = "tokenOverlay";
+  o.innerHTML = `<div class="popup" style="max-width:400px;"><p class="ask">One time setup: paste your sync token</p>
+    <input id="tokIn" type="password" autocomplete="off" placeholder="github_pat_..." style="width:100%;box-sizing:border-box;padding:10px;border-radius:8px;border:0.5px solid var(--border);background:transparent;color:var(--text);font-size:12px;">
+    <div class="bottom-bar" style="margin-top:10px;"><button class="btn primary" id="tokSave">Save</button><button class="btn secondary" id="tokLater">Later</button></div></div>`;
+  document.getElementById("app").appendChild(o);
+  document.getElementById("tokLater").onclick = ()=>o.remove();
+  document.getElementById("tokSave").onclick = async ()=>{
+    const v = document.getElementById("tokIn").value.trim();
+    if(!v) return;
+    await sset("settings:gh", {token:v}); o.remove(); autoUpload();
+  };
 }
 
 async function generateExportText(){
@@ -1269,7 +1281,7 @@ window.addEventListener('error', function(e){
     await reconcileMissed();
     const start = (todayISO() < PROGRAM_START) ? PROGRAM_START : todayISO();
     await setView(start);
-    autoUpload();
+    setTimeout(autoUpload, 1500);
   }catch(e){
     const app = document.getElementById('app');
     if(app) app.innerHTML = '<div style="padding:24px;color:#E24B4A;font-size:13px;">Something went wrong: ' + (e && e.message ? e.message : e) + '</div>';
