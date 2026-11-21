@@ -122,6 +122,9 @@ textarea{width:100%; background:var(--bg); border:0.5px solid var(--border); bor
 /* ---------- fixed dates ---------- */
 const CYCLE_START = "2026-08-24"; // Monday anchor for weekday alignment (Aug 25 2026 is a Tuesday)
 const PROGRAM_START = "2026-08-25";
+const ANCHOR2 = "2026-11-23"; // fresh cycle 8 starts here; week 1 of the plan begins this Monday
+function cycleIdx(d){ return d >= ANCHOR2 ? 7 + Math.floor(diffDays(ANCHOR2, d)/14) : Math.floor(diffDays(CYCLE_START, d)/14); }
+function cycleStartOf(i){ return i >= 7 ? addDays(ANCHOR2, (i-7)*14) : addDays(CYCLE_START, i*14); }
 const QUICK_ID = "quick";
 
 function formatRest(sec){
@@ -392,7 +395,7 @@ function diffDays(a,b){ return Math.round((new Date(b+"T00:00:00")-new Date(a+"T
 function isLastDayOfMonth(dateStr){ const d=new Date(dateStr+"T00:00:00"); const next=new Date(d); next.setDate(d.getDate()+1); return next.getMonth()!==d.getMonth(); }
 
 function dayIndexFor(dateStr){
-  let n = diffDays(CYCLE_START, dateStr) % 14;
+  let n = diffDays(dateStr >= ANCHOR2 ? ANCHOR2 : CYCLE_START, dateStr) % 14;
   if(n<0) n += 14;
   return n;
 }
@@ -742,8 +745,8 @@ async function renderMenu(){
   overlay.className = "overlay" + (state.menuOpen ? " open" : "");
   overlay.id = "menuOverlay";
 
-  const cycleNum = Math.floor(diffDays(CYCLE_START, state.viewDate) / 14);
-  const cycleStartDate = addDays(CYCLE_START, cycleNum*14);
+  const cycleNum = cycleIdx(state.viewDate);
+  const cycleStartDate = cycleStartOf(cycleNum);
   const logs = [];
   for(let i=0;i<14;i++){
     const d = addDays(cycleStartDate, i);
@@ -841,8 +844,23 @@ async function autoUpload(){
     if(!cfg || !cfg.token){ askToken(); return; }
     const t = todayISO();
     if(t < PROGRAM_START || cfg.lastAt === t) return;
-    await uploadExport(Math.floor(diffDays(CYCLE_START, t)/14)+1);
+    await uploadExport(cycleIdx(t)+1);
   }catch(e){ console.error("autoUpload", e); }
+}
+async function showSummary(){
+  try{
+    const r = await fetch("summary.json?"+Date.now(), {cache:"no-store"});
+    if(!r.ok) return;
+    const j = await r.json();
+    if(!j || !j.id || !Array.isArray(j.bullets)) return;
+    const seen = await sget("settings:summarySeen");
+    if(seen === j.id) return;
+    const o = document.createElement("div");
+    o.className = "popup-overlay open"; o.id = "summaryOverlay";
+    o.innerHTML = `<div class="popup" style="max-width:400px;"><p class="ask">${j.title || "Cycle update"}</p><ul style="margin:0 0 12px;padding-left:18px;font-size:13px;line-height:1.5;">${j.bullets.map(b=>"<li>"+String(b).replace(/</g,"&lt;")+"</li>").join("")}</ul><div class="bottom-bar"><button class="btn primary" id="sumOk">Got it</button></div></div>`;
+    document.getElementById("app").appendChild(o);
+    document.getElementById("sumOk").onclick = async ()=>{ await sset("settings:summarySeen", j.id); o.remove(); };
+  }catch(e){}
 }
 function askToken(){
   if(document.getElementById("tokenOverlay")) return;
@@ -969,7 +987,7 @@ async function renderExportPopup(){
   document.getElementById("ghTestBtn").onclick = async ()=>{
     st.textContent = "Uploading...";
     try{
-      const cur = Math.floor(diffDays(CYCLE_START, todayISO())/14) + 1;
+      const cur = cycleIdx(todayISO()) + 1;
       await uploadExport(cur);
       st.textContent = "Uploaded to GitHub.";
     }catch(e){ st.textContent = "Failed: " + e.message; }
@@ -1281,7 +1299,7 @@ window.addEventListener('error', function(e){
     await reconcileMissed();
     const start = (todayISO() < PROGRAM_START) ? PROGRAM_START : todayISO();
     await setView(start);
-    setTimeout(autoUpload, 1500);
+    setTimeout(autoUpload, 1500); setTimeout(showSummary, 2000);
   }catch(e){
     const app = document.getElementById('app');
     if(app) app.innerHTML = '<div style="padding:24px;color:#E24B4A;font-size:13px;">Something went wrong: ' + (e && e.message ? e.message : e) + '</div>';
