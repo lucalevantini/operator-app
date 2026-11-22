@@ -1,4 +1,4 @@
-Training log export — generated 2026-11-21
+Training log export — generated 2026-11-22
 
 2026-08-25 — Hypertrophy — push/pull + core [completed]
   Bench press: ✓ 40kg x8, ✓ 40kg x12, ✓ 40kg x12
@@ -374,3 +374,5 @@ No reps, distance: 20m
 2026-11-19 — Hypertrophy — lower body [missed]
 
 2026-11-20 — Upper body strength + grip [missed]
+
+2026-11-21 — Active recovery [missed]
