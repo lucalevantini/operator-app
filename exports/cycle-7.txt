@@ -45,7 +45,7 @@ Training log export — generated 2026-11-22
   Pull-up, wide grip: ✓ 5, ✓ 5, ✓ 5
   Single-arm DB row: ✓ 22kg x12, ✓ 22kg x12, ✓ 22kg x12
   Rear delt cable fly: ✓ 10kg x8, ✓ 10kg x8, ✓ 8
-  Cable row, wide grip: ✓ 50kg x10, ✓ 50kg x10, ✓ 50kg x10
+  Cable row: ✓ 50kg x10, ✓ 50kg x10, ✓ 50kg x10
   EZ bar curl: ✓ 12, ✓ 11, ✓ 6
   Hanging leg raise: ✓ 8, ✓ 8
   Neck training: ✓ 15, ✓ 15
@@ -240,7 +240,7 @@ Also, include more mobility exercises where possible, increase joints ROM and st
 
 2026-10-27 — Hypertrophy — upper pull [completed]
   Pull-up, wide grip: ✓ 6, ✓ 6, ✓ 4
-  Cable row, wide grip: ✓ 50kg x10, ✓ 50kg x10, ✓ 50kg x10
+  Cable row: ✓ 50kg x10, ✓ 50kg x10, ✓ 50kg x10
     Exercise note: Doing normal grip
   Rear delt cable fly: ✓ 2.5kg x12, ✓ 2.5kg x12, ✓ 2.5kg x12
   Hanging leg raise: ✓ 8, ✓ 8, ✓ 8
@@ -263,7 +263,7 @@ Couldn’t finish this for the elbow
   Crunch, variation of choice: ✓ 20, ✓ 20
   Neck training: done
     Exercise note: Make this section green as well once ticked
-  Side plank: ✓ 
+  Copenhagen plank: ✓ 
     Exercise note: Same here, make green once ticked
   Cooldown note (Chest stretch (wall), each angle): With the cool down, add 1 level exercise per day as well
 
@@ -324,7 +324,7 @@ Couldn’t finish this for the elbow
   EZ bar curl: ✓ 15kg x8, ✓ 15kg x8, ✓ 15kg x8
     Exercise note: This after DB Rows, but change, never preacher curls, standing EZ curls I also did spider curls, 3 sets of 10 reps, 10kg DB per hand. Add this
   Rear delt cable fly: ✓ 10, ✓ 2.5kg x12, ✓ 2.5kg x12
-  Cable row, wide grip: ✓ 45kg x10, ✓ 50kg x8, ✓ 50kg x8
+  Cable row: ✓ 45kg x10, ✓ 50kg x8, ✓ 50kg x8
     Exercise note: Did tight grip 
   Notes: Good, did this on wednesday
 
@@ -337,7 +337,7 @@ Couldn’t finish this for the elbow
   Lateral raise: ✓ 6kg x15, ✓ 6kg x12, ✓ 6kg x12
   Push-up, feet elevated: ✓ 10, ✓ 10, ✓ 10
   Tricep dip (bench): ✓ 20, ✓ 20, ✓ 20
-  Side plank: ✓ 
+  Copenhagen plank: ✓ 
     Exercise note: Swapped for Copenhagen planks. 30 la each side, 1 set
 
 If I tick, still make the section green
