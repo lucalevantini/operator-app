@@ -1,4 +1,4 @@
-Training log export — generated 2026-11-23
+Training log export — generated 2026-11-24
 
 2026-08-25 — Hypertrophy — push/pull + core [completed]
   Bench press: ✓ 40kg x8, ✓ 40kg x12, ✓ 40kg x12
@@ -378,3 +378,8 @@ No reps, distance: 20m
 2026-11-21 — Active recovery [missed]
 
 2026-11-22 — Yoga & mobility [missed]
+
+2026-11-23 — Full-body conditioning [completed]
+  Circuit block A — 5 rounds: done
+    Exercise note: All with same IB 20kg, abs is done as Russian twists
+  Notes: Did a variant of circuit A only, skipping 1 week of training sets me back. Lower back pain
