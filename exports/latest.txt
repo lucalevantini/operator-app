@@ -1,4 +1,4 @@
-Training log export — generated 2026-11-24
+Training log export — generated 2026-11-25
 
 2026-08-25 — Hypertrophy — push/pull + core [completed]
   Bench press: ✓ 40kg x8, ✓ 40kg x12, ✓ 40kg x12
@@ -383,3 +383,14 @@ No reps, distance: 20m
   Circuit block A — 5 rounds: done
     Exercise note: All with same IB 20kg, abs is done as Russian twists
   Notes: Did a variant of circuit A only, skipping 1 week of training sets me back. Lower back pain
+
+2026-11-24 — Hypertrophy — push/pull + core [completed]
+  Bench press: ✓ 60kg x8, ✓ 60kg x8, ✓ 60kg x8
+    Exercise note: Time banner needs to be bigger and stay when I scroll, can you put it also on lock screen?
+  Barbell row: ✓ 50kg x8, ✓ 50kg x8, ✓ 50kg x8
+  Incline dumbbell press: ✓ 22kg x10, ✓ 22kg x10, ✓ 22kg x8
+  Meadows row: ✓ 20kg x8, ✓ 20kg x8, ✓ 20kg x8
+  Push-up, feet elevated: ✓ 20, ✓ 20, ✓ 15
+  EZ bar curl: ✓ 10, ✓ 10, ✓ 10
+  Tricep rope pushdown: ✓ 15kg x12, ✓ 15kg x12, ✓ 15kg x12
+  Cable crossover: ✓ 7.5kg x12, ✓ 7.5kg x12, ✓ 7.5kg x12
