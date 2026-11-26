@@ -1,4 +1,4 @@
-Training log export — generated 2026-11-25
+Training log export — generated 2026-11-26
 
 2026-08-25 — Hypertrophy — push/pull + core [completed]
   Bench press: ✓ 40kg x8, ✓ 40kg x12, ✓ 40kg x12
@@ -394,3 +394,16 @@ No reps, distance: 20m
   EZ bar curl: ✓ 10, ✓ 10, ✓ 10
   Tricep rope pushdown: ✓ 15kg x12, ✓ 15kg x12, ✓ 15kg x12
   Cable crossover: ✓ 7.5kg x12, ✓ 7.5kg x12, ✓ 7.5kg x12
+
+2026-11-25 — Aerobic base + swim [missed]
+
+2026-11-27 — Upper body strength + grip [completed]
+  Weighted pull-up: ✓ 5, ✓ 5, ✓ 5, ✓ 0kg x5
+    Exercise note: Bodyweight
+  Overhead press: ✓ 40kg x4, ✓ 40kg x4
+  Pendlay row: ✓ 0kg x8, ✓ 0kg x8, ✓ 0kg x8
+    Exercise note: Australian rows - bodyweight
+  Windshield wipers: ✓ 12, ✓ 12
+    Exercise note: Other hanging abs
+  Neck training: done
+  Notes: Did this on Wednesday rather than Friday 
