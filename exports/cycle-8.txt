@@ -1,4 +1,4 @@
-Training log export — generated 2026-11-26
+Training log export — generated 2026-11-27
 
 2026-08-25 — Hypertrophy — push/pull + core [completed]
   Bench press: ✓ 40kg x8, ✓ 40kg x12, ✓ 40kg x12
@@ -396,6 +396,16 @@ No reps, distance: 20m
   Cable crossover: ✓ 7.5kg x12, ✓ 7.5kg x12, ✓ 7.5kg x12
 
 2026-11-25 — Aerobic base + swim [missed]
+
+2026-11-26 — Hypertrophy — lower body [completed]
+  Front squat: ✓ 50kg x8, ✓ 50kg x8, ✓ 50kg x8
+  Goblet squat: ✓ 10, ✓ 12, ✓ 24kg x15
+  Walking lunge: ✓ 16kg x12, ✓ 16kg x12, ✓ 16kg x12
+    Exercise note: Just forward: 6 each leg, 12 reps total per set
+  Bodyweight calf raise: ✓ 20, ✓ 20
+  Single-leg RDL: ✓ 8, ✓ 8, - 5
+  Crunch: ✓ 15, ✓ 15
+  Notes: Bit stiff, leg muscles felt the strain
 
 2026-11-27 — Upper body strength + grip [completed]
   Weighted pull-up: ✓ 5, ✓ 5, ✓ 5, ✓ 0kg x5
